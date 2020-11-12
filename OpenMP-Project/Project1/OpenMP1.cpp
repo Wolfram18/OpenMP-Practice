@@ -17,8 +17,8 @@ int sumBinary(int date) {
     return sum;
 }
 
-// Посчитать сумму единиц в бинарной записи числа 
-// всех попарных произведений элементов для каждой строки
+// РџРѕСЃС‡РёС‚Р°С‚СЊ СЃСѓРјРјСѓ РµРґРёРЅРёС† РІ Р±РёРЅР°СЂРЅРѕР№ Р·Р°РїРёСЃРё С‡РёСЃР»Р° 
+// РІСЃРµС… РїРѕРїР°СЂРЅС‹С… РїСЂРѕРёР·РІРµРґРµРЅРёР№ СЌР»РµРјРµРЅС‚РѕРІ РґР»СЏ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРё
 void main()
 {
     srand(time(0));
@@ -28,15 +28,15 @@ void main()
     for (i = 0; i < N * M; i++)
         a[i] = rand() % 20;
 
-    // Параллельный фрагмент
+    // РџР°СЂР°Р»Р»РµР»СЊРЅС‹Р№ С„СЂР°РіРјРµРЅС‚
     auto startPar = chrono::system_clock::now();
 #pragma omp parallel shared(a) private(i) num_threads(10)
     {
 #pragma omp for private(j, k, sum) 
-        for (i = 0; i < N * M; i = i + M) // Построчно
+        for (i = 0; i < N * M; i = i + M) // РџРѕСЃС‚СЂРѕС‡РЅРѕ
         {
             sum = 0;
-            for (j = i; j < i + M; j++) // Попарно
+            for (j = i; j < i + M; j++) // РџРѕРїР°СЂРЅРѕ
                 for (k = j + 1; k < i + M; k++)
                     sum += sumBinary(a[j] * a[k]);
             //cout << "  Line: " << i / M + 1 << " --- 1: " << sum << endl;
@@ -44,12 +44,12 @@ void main()
     }
     auto stopPar = chrono::system_clock::now();
 
-    // Фрагмент без распараллеливания
+    // Р¤СЂР°РіРјРµРЅС‚ Р±РµР· СЂР°СЃРїР°СЂР°Р»Р»РµР»РёРІР°РЅРёСЏ
     auto startNoPar = chrono::system_clock::now();
-    for (i = 0; i < N * M; i = i + M) // Построчно
+    for (i = 0; i < N * M; i = i + M) // РџРѕСЃС‚СЂРѕС‡РЅРѕ
     {
         sum = 0;
-        for (j = i; j < i + M; j++) // Попарно
+        for (j = i; j < i + M; j++) // РџРѕРїР°СЂРЅРѕ
             for (k = j + 1; k < i + M; k++)
                 sum += sumBinary(a[j] * a[k]);
         //cout << "  Line: " << i / M + 1 << " --- 1: " << sum << endl;
