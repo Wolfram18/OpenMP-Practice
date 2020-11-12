@@ -24,7 +24,7 @@ void main()
     srand(time(0));
     int i, j, k, sum;
 
-    int *a = new int[N * M];
+    int* a = new int[N * M];
     for (i = 0; i < N * M; i++)
         a[i] = rand() % 20;
 
@@ -43,7 +43,7 @@ void main()
         }
     }
     auto stopPar = chrono::system_clock::now();
-    
+
     // Фрагмент без распараллеливания
     auto startNoPar = chrono::system_clock::now();
     for (i = 0; i < N * M; i = i + M) // Построчно

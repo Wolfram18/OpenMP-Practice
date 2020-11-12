@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OpenMP34.cpp">
+    <ClCompile Include="OpenMP345.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
