@@ -15,13 +15,13 @@ char myRand()
     return state >> 24;
 }
 
-// Сумма значений Max(A[i]+B[i], 4A[i]-B[i]), больших 1
+// РЎСѓРјРјР° Р·РЅР°С‡РµРЅРёР№ Max(A[i]+B[i], 4A[i]-B[i]), Р±РѕР»СЊС€РёС… 1
 void main()
 {
     srand(time(0));
     int i, sum = 0, sum1 = 0, sum2 = 0, A, B, C;
 
-    // Заполнение массивов
+    // Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІРѕРІ
 #pragma omp parallel sections shared(a, b) private(i) 
     {
 #pragma omp section
@@ -32,7 +32,7 @@ void main()
             b[i] = (int)myRand(); //b[i] = rand() % 10 - 5;
     }
 
-    // Параллельный фрагмент
+    // РџР°СЂР°Р»Р»РµР»СЊРЅС‹Р№ С„СЂР°РіРјРµРЅС‚
     auto startPar = chrono::system_clock::now();
 #pragma omp parallel for shared(a, b) private(i, A, B, C) //reduction(+: sum)
     for (i = 0; i < N; i++) {
@@ -46,7 +46,7 @@ void main()
     auto stopPar = chrono::system_clock::now();
     cout << "\n  SumPar: " << sum;
 
-    // Распараллеливание по секциям (1 способ)
+    // Р Р°СЃРїР°СЂР°Р»Р»РµР»РёРІР°РЅРёРµ РїРѕ СЃРµРєС†РёСЏРј (1 СЃРїРѕСЃРѕР±)
     auto startParSec1 = chrono::system_clock::now();
 #pragma omp parallel sections shared(a, b) private(i, A, B, C) //reduction(+: sum1, sum2)
     {
@@ -71,7 +71,7 @@ void main()
     cout << "\n  SumParSec1: " << sum1 + sum2;
 
     sum1 = 0, sum2 = 0;
-    // Распараллеливание по секциям (2 способ)
+    // Р Р°СЃРїР°СЂР°Р»Р»РµР»РёРІР°РЅРёРµ РїРѕ СЃРµРєС†РёСЏРј (2 СЃРїРѕСЃРѕР±)
     auto startParSec2 = chrono::system_clock::now();
 #pragma omp parallel sections shared(a, b) private(i, A, B, C) //reduction(+: sum1, sum2)
     {
@@ -98,7 +98,7 @@ void main()
     cout << "\n  SumParSec2: " << sum1 + sum2;
 
     sum = 0;
-    // Фрагмент без распараллеливания
+    // Р¤СЂР°РіРјРµРЅС‚ Р±РµР· СЂР°СЃРїР°СЂР°Р»Р»РµР»РёРІР°РЅРёСЏ
     auto startNoPar = chrono::system_clock::now();
     for (i = 0; i < N; i++)
     {
