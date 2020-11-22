@@ -59,8 +59,8 @@ void main()
     chrono::duration<double> elapsPar = (stopPar - startPar);
     chrono::duration<double> elapsNoPar = (stopNoPar - startNoPar);
 
-    cout << "\n  Parallel End: " << elapsPar.count();
-    cout << "\n  NoParallel End: " << elapsNoPar.count() << endl << endl;
+    cout << "\n  Time of Parallel: " << elapsPar.count();
+    cout << "\n  Time of NoParallel: " << elapsNoPar.count() << endl << endl;
 
     delete[] a;
 }

@@ -38,7 +38,7 @@ void main()
     chrono::duration<double> elaps = (stop - start);
 
     if (NMAX > LIMIT)
-        cout << "\n  Parallel End: " << elaps.count() << endl << endl;
+        cout << "\n  Time of Parallel: " << elaps.count() << endl << endl;
     else
-        cout << "\n  NoParallel End: " << elaps.count() << endl << endl;
+        cout << "\n  Time of NoParallel: " << elaps.count() << endl << endl;
 }
