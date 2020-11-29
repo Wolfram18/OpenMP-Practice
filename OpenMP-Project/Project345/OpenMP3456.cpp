@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-const int N = 120000000;
+const int N = 1000000;
 
 int* a = new int[N];
 int* b = new int[N];
@@ -26,18 +26,12 @@ void main()
     // Заполнение массивов
 #pragma omp parallel sections shared(a, b, AA, BB) private(i) 
     {
-#pragma omp section
         for (i = 0; i < N; i++)
+        { 
             a[i] = (int)myRand(); //a[i] = rand() % 10 - 5;
-#pragma omp section
-        for (i = 0; i < N; i++)
             b[i] = (int)myRand(); //b[i] = rand() % 10 - 5;
-#pragma omp section
-        for (i = 0; i < N; i++)
-            AA[i] = 0; 
-#pragma omp section
-        for (i = 0; i < N; i++)
-            BB[i] = 0;
+            AA[i] = BB[i] = 0;
+        }
     }
 
     // Параллельный фрагмент
@@ -120,8 +114,7 @@ void main()
         if (C > 1)
         {
             omp_set_lock(&lock);
-            if (C > 1)
-                sum += C;
+            sum += C;
             omp_unset_lock(&lock);
         }
     }
