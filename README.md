@@ -1,2 +1,2 @@
 # OpenMP-Practice
-# Project1 - SumBinaryOnes
+Project1 - SumBinaryOnes
