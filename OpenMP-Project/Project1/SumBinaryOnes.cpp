@@ -3,8 +3,8 @@
 #include <iostream>
 using namespace std;
 
-const int N = 50;
-const int M = 50;
+const int N = 500;
+const int M = 500;
 
 int sumBinary(int date) {
     int sum = 0;
@@ -26,7 +26,7 @@ void main()
 
     int* a = new int[N * M];
     for (i = 0; i < N * M; i++)
-        a[i] = rand() % 20;
+        a[i] = 25; //rand() % 5;
 
     // Параллельный фрагмент
     auto startPar = chrono::system_clock::now();

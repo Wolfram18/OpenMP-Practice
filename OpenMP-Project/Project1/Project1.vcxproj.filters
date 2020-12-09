@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OpenMP1.cpp">
+    <ClCompile Include="SumBinaryOne.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
