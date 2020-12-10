@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SumBinaryOne.cpp">
+    <ClCompile Include="NumberOfThreads.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

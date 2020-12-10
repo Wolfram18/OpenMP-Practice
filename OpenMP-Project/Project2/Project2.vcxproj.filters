@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OpenMP2.cpp">
+    <ClCompile Include="UseOfConditions.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

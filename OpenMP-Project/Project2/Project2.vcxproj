@@ -140,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="OpenMP2.cpp">
+    <ClCompile Include="UseOfConditions.cpp">
       <OpenMPSupport Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</OpenMPSupport>
     </ClCompile>
   </ItemGroup>
