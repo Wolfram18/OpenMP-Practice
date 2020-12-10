@@ -3,8 +3,8 @@
 #include <ctime>
 using namespace std;
 
-const int NMAX = 7500; //50 - 1;
-const int LIMIT = 10000;
+const int NMAX = 22000;
+const int LIMIT = 30000;
 
 float a[NMAX][NMAX];
 

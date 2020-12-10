@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OpenMP3456.cpp">
+    <ClCompile Include="Synchronization.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

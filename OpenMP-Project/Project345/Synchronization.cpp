@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-const int N = 1000000;
+const int N = 40000000;
 
 int* a = new int[N];
 int* b = new int[N];
@@ -34,10 +34,24 @@ void main()
         }
     }
 
-    // Параллельный фрагмент
+    // Параллельный фрагмент с reduction
     sum = 0;
-    auto startPar = chrono::system_clock::now();
-#pragma omp parallel for shared(a, b, sum) private(i, A, B, C) //reduction(+: sum)
+    auto startParReduction = chrono::system_clock::now();
+#pragma omp parallel for shared(a, b) private(i, A, B, C) reduction(+: sum)
+    for (i = 0; i < N; i++) {
+        A = a[i] + b[i];
+        B = 4 * a[i] - b[i];
+        C = max(A, B);
+        if (C > 1)
+            sum += C;
+    }
+    auto stopParReduction = chrono::system_clock::now();
+    cout << "\n  Sum of ParallelReduction: " << sum;
+
+    // Параллельный фрагмент с atomic
+    sum = 0;
+    auto startParAtomic = chrono::system_clock::now();
+#pragma omp parallel for shared(a, b, sum) private(i, A, B, C) 
     for (i = 0; i < N; i++) {
         A = a[i] + b[i];
         B = 4 * a[i] - b[i];
@@ -46,8 +60,8 @@ void main()
 #pragma omp atomic
             sum += C;
     }
-    auto stopPar = chrono::system_clock::now();
-    cout << "\n  Sum of Parallel: " << sum;
+    auto stopParAtomic = chrono::system_clock::now();
+    cout << "\n  Sum of ParallelAtomic: " << sum;
 
     // Распараллеливание по секциям (1 способ)
     sum1 = 0, sum2 = 0;
@@ -162,15 +176,17 @@ void main()
     }
     auto stopNoPar = chrono::system_clock::now();
     cout << "\n  Sum of NoParallel: " << sum << endl;
-
-    chrono::duration<double> elapsPar = (stopPar - startPar);
+    
+    chrono::duration<double> elapsParReduction = (stopParReduction - startParReduction);
+    chrono::duration<double> elapsParAtomic = (stopParAtomic - startParAtomic);
     chrono::duration<double> elapsParSec1 = (stopParSec1 - startParSec1);
     chrono::duration<double> elapsParSec2 = (stopParSec2 - startParSec2);
     chrono::duration<double> elapsParLock = (stopParLock - startParLock);
     chrono::duration<double> elapsParBarrier = (stopParBarrier - startParBarrier);
     chrono::duration<double> elapsNoPar = (stopNoPar - startNoPar);
 
-    cout << "\n  Time of Parallel: " << elapsPar.count();
+    cout << "\n  Time of ParallelReduction: " << elapsParReduction.count();
+    cout << "\n  Time of ParallelAtomic: " << elapsParAtomic.count();
     cout << "\n  Time of ParallelSec1: " << elapsParSec1.count();
     cout << "\n  Time of ParallelSec2: " << elapsParSec2.count();
     cout << "\n  Time of ParallelLock: " << elapsParLock.count();
