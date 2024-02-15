@@ -1,5 +1,5 @@
 # Several experimental measurements with OpenMP
-The OpenMP C and C++ application program interface lets you write applications that effectively use multiple processors. Visual C++ supports the OpenMP 2.0 standard.
+The OpenMP C and C++ application program interface lets you write applications that effectively use multiple processors. The code was compiled in Microsoft Visual Studio. Visual C++ supports the OpenMP 2.0 standard.
 ## Research of the number of threads
 ![Debug](https://github.com/Wolfram18/OpenMP-Practice/blob/main/Charts/Debug1.png)
 ## 
